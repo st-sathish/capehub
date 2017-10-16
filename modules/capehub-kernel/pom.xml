@@ -16,6 +16,11 @@
   </properties>
   
   <dependencies>
+  	<dependency>
+  		<groupId>com.capestart</groupId>
+  		<artifactId>capehub-common</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
 	<dependency>
       <groupId>com.googlecode.guava-osgi</groupId>
       <artifactId>guava-osgi</artifactId>
