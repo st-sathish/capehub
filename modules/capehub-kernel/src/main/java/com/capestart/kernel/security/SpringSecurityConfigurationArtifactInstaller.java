@@ -8,25 +8,21 @@ public class SpringSecurityConfigurationArtifactInstaller implements ArtifactIns
 
 	@Override
 	public boolean canHandle(File arg0) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void install(File arg0) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void uninstall(File arg0) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void update(File arg0) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
