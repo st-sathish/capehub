@@ -30,6 +30,7 @@
   <modules>
   	<module>modules/capehub-kernel</module>
   	<module>modules/capehub-common</module>
+  	<module>modules/capehub-runtime-dependencies</module>
   </modules>
   
   <dependencyManagement>
