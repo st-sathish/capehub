@@ -11,20 +11,6 @@ public interface Organization {
   String getId();
 
   /**
-   * Returns the name for the local anonymous role.
-   *
-   * @return the anonymous role name
-   */
-  String getAnonymousRole();
-
-  /**
-   * Returns the name for the local admin role.
-   *
-   * @return the admin role name
-   */
-  String getAdminRole();
-
-  /**
    * @return the name
    */
   String getName();
