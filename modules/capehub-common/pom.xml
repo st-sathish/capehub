@@ -16,6 +16,12 @@
   </properties>
   
   <dependencies>
+
+  	<dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+    </dependency>
+    
   	<dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.core</artifactId>
@@ -25,6 +31,7 @@
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.compendium</artifactId>
     </dependency>
+    
   	<dependency>
   		<groupId>org.apache.felix</groupId>
   		<artifactId>org.apache.felix.fileinstall</artifactId>
