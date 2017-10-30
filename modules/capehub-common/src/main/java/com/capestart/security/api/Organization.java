@@ -16,6 +16,13 @@ public interface Organization {
   String getName();
 
   /**
+   * Returns the name for the local admin role.
+   *
+   * @return the admin role name
+   */
+  String getAdminRole();
+  
+  /**
    * Returns the organizational properties
    *
    * @return the properties

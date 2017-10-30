@@ -137,7 +137,7 @@ public class OrganizationDatabaseImpl implements OrganizationDatabase {
       tx.begin();
       JpaOrganization organizationEntity = getOrganizationEntity(org.getId(), em);
       if (organizationEntity == null) {
-        JpaOrganization organization = new JpaOrganization(org.getId(), org.getName(), org.getServers(), org.getProperties());
+        JpaOrganization organization = new JpaOrganization(org.getId(), org.getName(), org.getServers(), org.getAdminRole(), org.getProperties());
         em.persist(organization);
       } else {
         organizationEntity.setName(org.getName());

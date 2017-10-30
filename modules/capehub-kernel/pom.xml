@@ -12,7 +12,7 @@
   
   <properties>
     <capehub.basedir>${project.basedir}/../..</capehub.basedir>
-    <checkstyle.skip>false</checkstyle.skip>
+    <checkstyle.skip>true</checkstyle.skip>
   </properties>
   
   <dependencies>
@@ -21,6 +21,13 @@
   		<artifactId>capehub-common</artifactId>
   		<version>${project.version}</version>
   	</dependency>
+
+  	<dependency>
+  		<groupId>com.capestart</groupId>
+  		<artifactId>capehub-db</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+
 	<dependency>
       <groupId>com.googlecode.guava-osgi</groupId>
       <artifactId>guava-osgi</artifactId>

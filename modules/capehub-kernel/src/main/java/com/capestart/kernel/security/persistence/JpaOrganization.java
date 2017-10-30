@@ -41,6 +41,10 @@ public class JpaOrganization implements Organization {
   @Column(name = "name")
   protected String name;
 
+  /** The local admin role name */
+  @Column(name = "admin_role")
+  protected String adminRole;
+  
   @ElementCollection
   @MapKeyColumn(name = "name")
   @Column(name = "port")
@@ -70,13 +74,16 @@ public class JpaOrganization implements Organization {
    *          the host name
    * @param serverPort
    *          the host port
+   * @param adminRole
+   *          name of the local admin role
    * @param properties
    *          arbitrary properties defined for this organization, which might include branding, etc.
    */
-  public JpaOrganization(String orgId, String name, String serverName, Integer serverPort, Map<String, String> properties) {
+  public JpaOrganization(String orgId, String name, String serverName, Integer serverPort, String adminRole, Map<String, String> properties) {
     super();
     this.id = orgId;
     this.name = name;
+    this.adminRole = adminRole;
     this.servers = new HashMap<String, Integer>();
     this.servers.put(serverName, serverPort);
     this.properties = properties;
@@ -93,16 +100,15 @@ public class JpaOrganization implements Organization {
    *          the servers
    * @param adminRole
    *          name of the local admin role
-   * @param anonymousRole
-   *          name of the local anonymous role
    * @param properties
    *          arbitrary properties defined for this organization, which might include branding, etc.
    */
-  public JpaOrganization(String orgId, String name, Map<String, Integer> servers, Map<String, String> properties) {
+  public JpaOrganization(String orgId, String name, Map<String, Integer> servers,String adminRole,  Map<String, String> properties) {
     super();
     this.id = orgId;
     this.name = name;
     this.servers = servers;
+    this.adminRole = adminRole;
     this.properties = properties;
   }
 
@@ -115,7 +121,7 @@ public class JpaOrganization implements Organization {
   }
 
   /**
-   * @see org.opencastproject.security.api.Organization#getName()
+   * @see com.capestart.security.api.Organization#getName()
    */
   public String getName() {
     return name;
@@ -126,7 +132,7 @@ public class JpaOrganization implements Organization {
   }
 
   	/**
-	 * @see com.capestartproject.security.api.Organization#getProperties()
+	 * @see com.capestart.security.api.Organization#getProperties()
 	 */
   public Map<String, String> getProperties() {
     return properties;
@@ -137,7 +143,7 @@ public class JpaOrganization implements Organization {
   }
 
   	/**
-	 * @see com.capestartproject.security.api.Organization#getServers()
+	 * @see com.capestart.security.api.Organization#getServers()
 	 */
   @Override
   public Map<String, Integer> getServers() {
@@ -213,5 +219,14 @@ public class JpaOrganization implements Organization {
   public String toString() {
     return id;
   }
+
+  public void setAdminRole(String adminRole) {
+	 this.adminRole = adminRole;
+  }
+  
+	@Override
+	public String getAdminRole() {
+		return this.adminRole;
+	}
 
 }

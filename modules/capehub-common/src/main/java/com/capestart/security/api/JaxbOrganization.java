@@ -22,94 +22,107 @@ import javax.xml.bind.annotation.XmlValue;
  * An organization that is hosted on this Capehub instance.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "organization", namespace = "http://com.capestartproject.security")
-@XmlRootElement(name = "organization", namespace = "http://com.capestartproject.security")
+@XmlType(name = "organization", namespace = "http://com.capestart.security")
+@XmlRootElement(name = "organization", namespace = "http://com.capestart.security")
 public class JaxbOrganization implements Organization {
 
-  /** The organizational identifier */
-  @XmlID
-  @XmlAttribute
-  protected String id = null;
+	  /** The organizational identifier */
+	  @XmlID
+	  @XmlAttribute
+	  protected String id = null;
+	
+	  /** The friendly name of the organization */
+	  @XmlElement(name = "name")
+	  protected String name = null;
 
-  /** The friendly name of the organization */
-  @XmlElement(name = "name")
-  protected String name = null;
-
-  /** Server and port mapping */
-  @XmlElement(name = "server")
-  @XmlElementWrapper(name = "servers")
-  protected List<OrgServer> servers = null;
-
-  /** Arbitrary string properties associated with this organization */
-  @XmlElement(name = "property")
-  @XmlElementWrapper(name = "properties")
-  protected List<OrgProperty> properties = null;
-
-  /**
-   * No-arg constructor needed by JAXB
-   */
-  public JaxbOrganization() {
-  }
-
-  public JaxbOrganization(String orgId) {
-    this.id = orgId;
-  }
-
-  /**
-   * Constructs an organization with its attributes.
-   *
-   * @param id
-   *          the unique identifier
-   * @param name
-   *          the friendly name
-   * @param serverName
-   *          the host name
-   * @param serverPort
-   *          the host port
-   * @param properties
-   *          arbitrary properties defined for this organization, which might include branding, etc.
-   */
-  public JaxbOrganization(String id, String name, Map<String, Integer> servers,
-          Map<String, String> properties) {
-    this();
-    this.id = id;
-    this.name = name;
-    this.servers = new ArrayList<JaxbOrganization.OrgServer>();
-    if (servers != null && !servers.isEmpty()) {
-      for (Entry<String, Integer> entry : servers.entrySet()) {
-        this.servers.add(new OrgServer(entry.getKey(), entry.getValue()));
-      }
-    }
-    this.properties = new ArrayList<JaxbOrganization.OrgProperty>();
-    if (properties != null && !properties.isEmpty()) {
-      for (Entry<String, String> entry : properties.entrySet()) {
-        this.properties.add(new OrgProperty(entry.getKey(), entry.getValue()));
-      }
-    }
-  }
-
-  /**
-   * Constructs an organization from an organization
-   *
-   * @param org
-   *          the organization
-   */
-  public static JaxbOrganization fromOrganization(Organization org) {
-    if (org instanceof JaxbOrganization)
-      return (JaxbOrganization) org;
-    return new JaxbOrganization(org.getId(), org.getName(), org.getServers(), org.getProperties());
-  }
-
-  /**
-   * @see com.capestartproject.common.security.api.Organization#getId()
-   */
-  @Override
-  public String getId() {
-    return id;
-  }
+	  /** Server and port mapping */
+	  @XmlElement(name = "server")
+	  @XmlElementWrapper(name = "servers")
+	  protected List<OrgServer> servers = null;
+	
+	  /** Arbitrary string properties associated with this organization */
+	  @XmlElement(name = "property")
+	  @XmlElementWrapper(name = "properties")
+	  protected List<OrgProperty> properties = null;
+	
+	  /** The local admin role name */
+	  @XmlElement(name = "adminRole")
+	  protected String adminRole = null;
+  
+	  /**
+	   * No-arg constructor needed by JAXB
+	   */
+	  public JaxbOrganization() {
+	  }
+	
+	  public JaxbOrganization(String orgId) {
+	    this.id = orgId;
+	  }
 
 	  /**
-	   * @see com.capestartproject.common.security.api.Organization#getName()
+	   * Constructs an organization with its attributes.
+	   *
+	   * @param id
+	   *          the unique identifier
+	   * @param name
+	   *          the friendly name
+	   * @param serverName
+	   *          the host name
+	   * @param serverPort
+	   *          the host port
+	   * @param properties
+	   *          arbitrary properties defined for this organization, which might include branding, etc.
+	   */
+	  public JaxbOrganization(String id, String name, Map<String, Integer> servers,
+			  String adminRole, Map<String, String> properties) {
+	    this();
+	    this.id = id;
+	    this.name = name;
+	    this.servers = new ArrayList<JaxbOrganization.OrgServer>();
+	    if (servers != null && !servers.isEmpty()) {
+	      for (Entry<String, Integer> entry : servers.entrySet()) {
+	        this.servers.add(new OrgServer(entry.getKey(), entry.getValue()));
+	      }
+	    }
+	    this.adminRole = adminRole;
+	    this.properties = new ArrayList<JaxbOrganization.OrgProperty>();
+	    if (properties != null && !properties.isEmpty()) {
+	      for (Entry<String, String> entry : properties.entrySet()) {
+	        this.properties.add(new OrgProperty(entry.getKey(), entry.getValue()));
+	      }
+	    }
+	  }
+
+	  /**
+	   * @see com.capestart.security.api.Organization#getId()
+	   */
+	  @Override
+	  public String getAdminRole() {
+	    return adminRole;
+	  }
+  
+	  /**
+	   * Constructs an organization from an organization
+	   *
+	   * @param org
+	   *          the organization
+	   */
+	  public static JaxbOrganization fromOrganization(Organization org) {
+	    if (org instanceof JaxbOrganization)
+	      return (JaxbOrganization) org;
+	    return new JaxbOrganization(org.getId(), org.getName(), org.getServers(), org.getAdminRole(), org.getProperties());
+	  }
+
+	  /**
+	   * @see com.capestart.security.api.Organization#getId()
+	   */
+	  @Override
+	  public String getId() {
+	    return id;
+	  }
+
+	  /**
+	   * @see com.capestart.security.api.Organization#getName()
 	   */
 	  @Override
 	  public String getName() {
@@ -117,7 +130,7 @@ public class JaxbOrganization implements Organization {
 	  }
 
 	  /**
-	   * @see com.capestartproject.common.security.api.Organization#getServers()
+	   * @see com.capestart.security.api.Organization#getServers()
 	   */
 	  @Override
 	  public Map<String, Integer> getServers() {
@@ -131,7 +144,7 @@ public class JaxbOrganization implements Organization {
 	  }
 
 	  /**
-	   * @see com.capestartproject.common.security.api.Organization#getProperties()
+	   * @see com.capestart.security.api.Organization#getProperties()
 	   */
 	  @Override
 	  public Map<String, String> getProperties() {
@@ -178,7 +191,7 @@ public class JaxbOrganization implements Organization {
 	   * An organization property
 	   */
 	  @XmlAccessorType(XmlAccessType.FIELD)
-	  @XmlType(name = "server", namespace = "http://com.capestartproject.security")
+	  @XmlType(name = "server", namespace = "http://com.capestart.security")
 	  public static class OrgServer {
 	
 	    /** The server name */
@@ -227,7 +240,7 @@ public class JaxbOrganization implements Organization {
 	   * An organization property
 	   */
 	  @XmlAccessorType(XmlAccessType.FIELD)
-	  @XmlType(name = "property", namespace = "http://com.capesartproject.security")
+	  @XmlType(name = "property", namespace = "http://com.capesart.security")
 	  public static class OrgProperty {
 	
 	    /** The property key */

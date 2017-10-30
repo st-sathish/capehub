@@ -1,6 +1,7 @@
 CREATE TABLE ch_organization (
   id VARCHAR(128) NOT NULL,
   name VARCHAR(255),
+  admin_role VARCHAR(255),
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
