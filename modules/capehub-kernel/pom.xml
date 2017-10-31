@@ -311,7 +311,9 @@
               org.springframework.security.oauth.provider.token;version=1.0.0.M1
             </Export-Package>
             <Service-Component>
-              OSGI-INF/security-config-scanner.xml
+              OSGI-INF/security-config-scanner.xml,
+              OSGI-INF/organization-filter.xml,
+              OSGI-INF/cleansessions-filter.xml
             </Service-Component>
             <JPA-PersistenceUnits>
               com.capestart.kernel
