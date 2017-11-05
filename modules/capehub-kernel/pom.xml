@@ -314,7 +314,8 @@
               OSGI-INF/security-config-scanner.xml,
               OSGI-INF/organization-filter.xml,
               OSGI-INF/cleansessions-filter.xml,
-              OSGI-INF/organization-directory-service.xml
+              OSGI-INF/organization-directory-service.xml,
+              OSGI-INF/organization-persistence.xml
             </Service-Component>
             <JPA-PersistenceUnits>
               com.capestart.kernel
