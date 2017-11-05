@@ -303,6 +303,7 @@
               com.capestart.kernel.filter.proxy;version=${project.version},
               com.capestart.kernel.security;version=${project.version},
               com.capestart.kernel.security.persistence;version=${project.version},
+              com.capestart.kernel.rest;version=${project.version},
               org.springframework.security.oauth;version=1.0.0.M1,
               org.springframework.security.oauth.common;version=1.0.0.M1,
               org.springframework.security.oauth.config;version=1.0.0.M1,

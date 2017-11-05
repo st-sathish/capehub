@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
-	<scr:component name="com.capestartproject.kernel.rest.CleanSessionsFilter" immediate="true">
+	<scr:component name="com.capestart.kernel.rest.CleanSessionsFilter" immediate="true">
 	    <implementation class="com.capestart.kernel.rest.CleanSessionsFilter" />
 	    <property name="service.description" value="Clean Digest Sessions and Set Max Inactive Interval Filter" />
 	    <property name="contextId" value="capestart.httpcontext" />

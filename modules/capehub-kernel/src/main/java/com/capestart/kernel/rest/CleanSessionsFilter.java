@@ -23,10 +23,10 @@ import com.capestart.rest.RestConstants;
  * @author CS39
  *
  */
-public class CleanSessionFilter implements Filter {
+public class CleanSessionsFilter implements Filter {
 
 	/** The logger */
-	private static final Logger logger = LoggerFactory.getLogger(CleanSessionFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(CleanSessionsFilter.class);
 
 	/** Maximum inactive request time */
 	private static final int NO_MAX_INACTIVE_INTERVAL_SET = -1;

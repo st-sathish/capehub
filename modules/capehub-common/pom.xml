@@ -222,6 +222,25 @@
   			<configuration>
           		<instructions>
             		<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            		<Import-Package>
+              			*;resolution:=optional
+            		</Import-Package>
+		            <Embed-Dependency>
+		              truezip;inline=true,
+		              freemarker;inline=true
+		            </Embed-Dependency>
+		            <Private-Package>
+		              freemarker.core, freemarker.template
+		            </Private-Package>
+		            <Export-Package>
+		              com.capestart.util.*;version=${project.version};-split-package:=merge-first,
+		              com.capestart.fn;version=${project.version},
+		              com.capestart.fn.juc;version=${project.version},
+		              com.capestart.rest;version=${project.version},
+		              com.capestart.security.api;version=${project.version},
+		              com.capestart.systems;version=${project.version},
+		              com.capestart.security.util;version=${project.version}
+		            </Export-Package>
           		</instructions>
         	</configuration>
   		</plugin>	
