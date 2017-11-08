@@ -45,7 +45,6 @@ public class SpringSecurityConfigurationArtifactInstaller implements ArtifactIns
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void activate(ComponentContext cc) {
-		logger.info("activate() is called");
 		this.bundleContext = cc.getBundleContext();
 	    this.appContexts = new HashMap<String, OsgiBundleXmlApplicationContext>();
 

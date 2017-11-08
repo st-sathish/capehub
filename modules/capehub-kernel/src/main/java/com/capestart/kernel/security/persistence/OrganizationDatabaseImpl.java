@@ -44,11 +44,8 @@ public class OrganizationDatabaseImpl implements OrganizationDatabase {
    * @param cc
    */
   public void activate(ComponentContext cc) {
-    logger.info("Activating persistence manager for kernel");
 		try {
 			emf = persistenceProvider.createEntityManagerFactory("com.capestart.kernel", persistenceProperties);
-			logger.debug("Kernel Entity manager factory created {}", emf);
-			logger.info("Kernel Entity manager factory created");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
