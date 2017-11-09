@@ -1,3 +1,7 @@
+/**
+ *  Copyright 2017 The Regents is Capestart at Nagercoil
+ *
+ */
 package com.capestart.kernel.filter.proxy;
 
 import org.apache.commons.lang.StringUtils;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
+ name="com.capestart.runtimeinfo.RuntimeInfo" immediate="true" activate="activate" deactivate="deactivate">
+  <implementation class="com.capestart.runtimeinfo.RuntimeInfo" />
+  <property name="service.description" value="Runtime Information REST Endpoint" />
+
+  <property name="capehub.service.type" value="com.capestart.info" />
+  <property name="capehub.service.path" value="/info" />
+
+  <service>
+    <provide interface="com.capestart.runtimeinfo.RuntimeInfo" />
+  </service>
+  <reference name="security-service" interface="com.capestart.security.api.SecurityService"
+    cardinality="1..1" policy="static" bind="setSecurityService" />
+</scr:component>

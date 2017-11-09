@@ -26,12 +26,12 @@
     <!-- # URL SECURITY # -->
     <!-- ################ -->
 
-    <!-- Allow anonymous access to the login form -->
-    <sec:intercept-url pattern="/login.html" access="ROLE_ANONYMOUS" />
+    <!-- Allow access to the login form -->
+    <sec:intercept-url pattern="/login.html" access="permitAll" />
 
     <!-- Enable anonymous access to the /info/me.json resource -->
-    <sec:intercept-url pattern="/info/me.json" method="GET" access="ROLE_ANONYMOUS" />
-    <sec:intercept-url pattern="/info/components.json" method="GET" access="ROLE_ANONYMOUS" />
+    <!-- <sec:intercept-url pattern="/info/me.json" method="GET" access="ROLE_ANONYMOUS" />
+    <sec:intercept-url pattern="/info/components.json" method="GET" access="ROLE_ANONYMOUS" /> -->
 
     <!-- Enable anonymous access to the engage player and the GET endpoints it requires -->
     <sec:intercept-url pattern="/search/**" method="GET" access="ROLE_ANONYMOUS" />
@@ -75,38 +75,20 @@
     <sec:request-cache ref="requestCache" />
 
     <!-- If any URLs are to be exposed to anonymous users, the "sec:anonymous" filter must be present -->
-    <sec:anonymous enabled="true" />
+    <!-- <sec:anonymous enabled="false" /> -->
 
     <!-- Enables log out -->
     <sec:logout />
-
-	<!--  pre-auth custom filter -->
-	<sec:custom-filter position="PRE_AUTH_FILTER" ref="googleFilter" />
 	
   </sec:http>
-
-  <!-- ######################################## -->
-  <!-- # Custom Anonymous Filter Definition   # -->
-  <!-- ######################################## -->
-
-  <bean id="anonymousFilter" class="com.capestartproject.kernel.security.TrustedAnonymousAuthenticationFilter">
-    <property name="userAttribute" ref="anonymousUserAttributes" />
-    <property name="key" value="anonymousKey" />
-  </bean>
-
-  <bean id="anonymousUserAttributes" class="org.springframework.security.core.userdetails.memory.UserAttribute">
-    <property name="authoritiesAsString" value="ROLE_ANONYMOUS"/>
-    <property name="password" value="empty"/>
-  </bean>
 
   <!-- ######################################## -->
   <!-- # Authentication Entry and Exit Points # -->
   <!-- ######################################## -->
 
   <!-- Differentiates between "normal" user requests and those requesting digest auth -->
-  <bean id="capehubEntryPoint" class="com.capestartproject.kernel.security.DelegatingAuthenticationEntryPoint">
+  <bean id="capehubEntryPoint" class="com.capestart.kernel.security.DelegatingAuthenticationEntryPoint">
     <property name="userEntryPoint" ref="userEntryPoint" />
-    <!-- <property name="userEntryPoint" ref="googleEntryPoint" /> -->
     <property name="digestAuthenticationEntryPoint" ref="digestEntryPoint" />
   </bean>
 
@@ -122,7 +104,7 @@
     <property name="nonceValiditySeconds" value="10" />
   </bean>
   
-  <bean id="authSuccessHandler" class="com.capestartproject.kernel.security.AuthenticationSuccessHandler">
+  <bean id="authSuccessHandler" class="com.capestart.kernel.security.AuthenticationSuccessHandler">
     <property name="securityService" ref="securityService" />
     <property name="welcomePages">
       <map>
@@ -157,43 +139,18 @@
                   interface="org.springframework.security.core.userdetails.UserDetailsService" />
 
   <osgi:reference id="securityService" cardinality="1..1"
-                  interface="com.capestartproject.common.security.api.SecurityService" />
+                  interface="com.capestart.security.api.SecurityService" />
 
   <!-- ############################# -->
   <!-- # Spring Security Internals # -->
   <!-- ############################# -->
-
-  <!-- configure all providers -->
-  <!-- <bean id="googleAuthenticationProvider" class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
-    <property name="authenticationUserDetailsService">
-      <bean class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
-          <constructor-arg ref="userDetailsService" />
-      </bean>
-    </property>
-    <property name="key" value="google" />
-  </bean> -->
   
   <!-- The JPA user directory stores md5 hashed, salted passwords, so we must use a username-salted md5 password encoder. -->
   <sec:authentication-manager alias="authenticationManager">
-  	<!-- <sec:authentication-provider ref="googleAuthenticationProvider"></sec:authentication-provider> -->
     <sec:authentication-provider user-service-ref="userDetailsService">
       <sec:password-encoder hash="md5"><sec:salt-source user-property="username" /></sec:password-encoder>
     </sec:authentication-provider>
   </sec:authentication-manager>
-
-  <!-- ############################## -->
-  <!-- #Google spring security config -->
-  <!-- ############################## -->
-  <!-- google authentication entry point -->
-  <bean id="googleEntryPoint" class="com.capestartproject.kernel.security.google.GoogleAuthenticationEntryPoint" />
-  
-  <!-- Filter bean to setup security context after the user redirect from google oauth service -->
-  <bean id="googleFilter" class="com.capestartproject.kernel.security.google.GoogleAuthenticationFilter">
-  		<property name="authenticationManager" ref="authenticationManager" />
-  </bean>
-  
-  <!-- Authentication manager to make rest call to fetch user details -->
-  <bean id="googleAuthenticationProvider" class="com.capestartproject.kernel.security.google.GoogleAuthenticationProvider" />
   
   <!-- Do not use a request cache -->
   <bean id="requestCache" class="org.springframework.security.web.savedrequest.NullRequestCache" />

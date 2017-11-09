@@ -32,6 +32,10 @@
   	<module>modules/capehub-common</module>
   	<module>modules/capehub-runtime-dependencies</module>
   	<module>modules/capehub-db</module>
+  	<module>modules/capehub-admin-ui</module>
+  	<module>modules/capehub-user-ui</module>
+  	<module>modules/capehub-runtime-info-ui</module>
+  	<module>modules/capehub-json</module>
   </modules>
   
   <dependencyManagement>
