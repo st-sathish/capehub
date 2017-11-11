@@ -338,6 +338,7 @@
               com.capestart.kernel.security;version=${project.version},
               com.capestart.kernel.security.persistence;version=${project.version},
               com.capestart.kernel.rest;version=${project.version},
+              com.capestart.kernel.userdirectory;version=${project.version},
               org.springframework.security.oauth;version=1.0.0.M1,
               org.springframework.security.oauth.common;version=1.0.0.M1,
               org.springframework.security.oauth.config;version=1.0.0.M1,
@@ -352,7 +353,8 @@
               OSGI-INF/organization-directory-service.xml,
               OSGI-INF/organization-persistence.xml,
               OSGI-INF/security-service.xml,
-              OSGI-INF/rest.xml
+              OSGI-INF/rest.xml,
+              OSGI-INF/user-and-role-directory-service.xml
             </Service-Component>
             <JPA-PersistenceUnits>
               com.capestart.kernel

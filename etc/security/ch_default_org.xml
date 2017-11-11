@@ -27,24 +27,24 @@
     <!-- ################ -->
 
     <!-- Allow access to the login form -->
-    <sec:intercept-url pattern="/login.html" access="permitAll" />
+    <sec:intercept-url pattern="/login.html" access="ROLE_ANONYMOUS" />
 
     <!-- Enable anonymous access to the /info/me.json resource -->
-    <!-- <sec:intercept-url pattern="/info/me.json" method="GET" access="ROLE_ANONYMOUS" />
-    <sec:intercept-url pattern="/info/components.json" method="GET" access="ROLE_ANONYMOUS" /> -->
+    <sec:intercept-url pattern="/info/me.json" method="GET" access="ROLE_ADMIN" />
+    <sec:intercept-url pattern="/info/components.json" method="GET" access="ROLE_ADMIN" />
 
     <!-- Enable anonymous access to the engage player and the GET endpoints it requires -->
-    <sec:intercept-url pattern="/search/**" method="GET" access="ROLE_ANONYMOUS" />
-    <sec:intercept-url pattern="/usertracking/**" method="GET" access="ROLE_ANONYMOUS" />
-    <sec:intercept-url pattern="/static/**" method="GET" access="ROLE_ANONYMOUS" />
-    <sec:intercept-url pattern="/export/**" method="GET" access="ROLE_ANONYMOUS" />
+    <sec:intercept-url pattern="/search/**" method="GET" access="ROLE_ADMIN" />
+    <sec:intercept-url pattern="/usertracking/**" method="GET" access="ROLE_ADMIN" />
+    <sec:intercept-url pattern="/static/**" method="GET" access="ROLE_ADMIN" />
+    <sec:intercept-url pattern="/export/**" method="GET" access="ROLE_ADMIN" />
 
     <!-- Enable anonymous access to the annotation and the series endpoints -->
-    <sec:intercept-url pattern="/annotation/**" method="GET" access="ROLE_ANONYMOUS" />
-    <sec:intercept-url pattern="/annotation/**" method="PUT" access="ROLE_ANONYMOUS" />
+    <sec:intercept-url pattern="/annotation/**" method="GET" access="ROLE_ADMIN" />
+    <sec:intercept-url pattern="/annotation/**" method="PUT" access="ROLE_ADMIN" />
 
     <!-- Enable anonymous access to the rss and atom feeds -->
-    <sec:intercept-url pattern="/feeds/**" method="GET" access="ROLE_ANONYMOUS" />
+    <sec:intercept-url pattern="/feeds/**" method="GET" access="ROLE_ADMIN" />
 
     <!-- Secure the system management URLs for admins only -->
     <sec:intercept-url pattern="/services/*" access="ROLE_ADMIN" />
@@ -75,7 +75,7 @@
     <sec:request-cache ref="requestCache" />
 
     <!-- If any URLs are to be exposed to anonymous users, the "sec:anonymous" filter must be present -->
-    <!-- <sec:anonymous enabled="false" /> -->
+    <sec:anonymous enabled="true" />
 
     <!-- Enables log out -->
     <sec:logout />
