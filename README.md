@@ -4,19 +4,17 @@
 
 ### Create database by executing below command
 ```sh
+CREATE DATABASE capehub CHARACTER SET utf8 COLLATE utf8_general_ci;
+```
 
-	CREATE DATABASE capehub CHARACTER SET utf8 COLLATE utf8_general_ci;
- 
- ### Give grant permission to capehub user
- ```sh
- 
-	GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX ON capehub.* TO 'capehub'@'localhost' IDENTIFIED BY 'capehub';
- 
-### Replace -DdeployTo path and use below mvn command to build JAR files
+### Give grant permission to capehub user
 ```sh
-
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX ON capehub.* TO 'capehub'@'localhost' IDENTIFIED BY 'capehub';
+```
+### Replace -DdeployTo path and use below mvn command to build JAR files inside project root directory
+```sh
 	mvn clean install -DdeployTo=/f/development/workspace1/capehub/capehub -Dmaven.test.skip=true
-
+```
 ### How to Run in Windows
 	* Go to bin/start_capehub.bat and set FELIX_HOME=<download_project_path_location>
 	* Go to MS-Dos or command prompt. Go the project location bin directory and type start_capehub.bat
@@ -26,7 +24,9 @@
 	* Open the terminal. Go the project location bin directory and type ./start_capehub.sh
 	* navigate to  http://localhost:8080
 	* You may need to increase the memory available to maven using environment variables.  For example:
-      $ export MAVEN_OPTS="-Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m"
+	```sh
+    export MAVEN_OPTS="-Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m"
+	```
 
 ### Customize Logging configuration
 	* Logging configuration can be customized by modifying <felix home>/etc/services/org.ops4j.pax.logging.properties.
