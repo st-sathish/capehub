@@ -11,12 +11,15 @@ CREATE DATABASE capehub CHARACTER SET utf8 COLLATE utf8_general_ci;
 ```sh
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX ON capehub.* TO 'capehub'@'localhost' IDENTIFIED BY 'capehub';
 ```
+### Run MySql Query
+	* Execute the Mysql query which is present inside <root_directory>/docs/scripts/ddl/mysql5.sql
+	
 ### Replace -DdeployTo path and use below mvn command to build JAR files inside project root directory
 ```sh
 mvn clean install -DdeployTo=/f/development/workspace1/capehub/capehub -Dmaven.test.skip=true
 ```
 ### How to Run in Windows
-	* Go to bin/start_capehub.bat and set FELIX_HOME=<download_project_path_location>
+	* Go to bin/start_capehub.bat and set FELIX_HOME=<project_root_path>
 	* Go to MS-Dos or command prompt. Go the project location bin directory and type start_capehub.bat
 
 ### How to Run in Linux
