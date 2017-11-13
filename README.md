@@ -13,7 +13,7 @@ GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX ON capehub.* TO 'capehub'@'l
 ```
 ### Replace -DdeployTo path and use below mvn command to build JAR files inside project root directory
 ```sh
-	mvn clean install -DdeployTo=/f/development/workspace1/capehub/capehub -Dmaven.test.skip=true
+mvn clean install -DdeployTo=/f/development/workspace1/capehub/capehub -Dmaven.test.skip=true
 ```
 ### How to Run in Windows
 	* Go to bin/start_capehub.bat and set FELIX_HOME=<download_project_path_location>
@@ -24,9 +24,9 @@ GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX ON capehub.* TO 'capehub'@'l
 	* Open the terminal. Go the project location bin directory and type ./start_capehub.sh
 	* navigate to  http://localhost:8080
 	* You may need to increase the memory available to maven using environment variables.  For example:
-	```sh
-    export MAVEN_OPTS="-Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m"
-	```
+```sh
+export MAVEN_OPTS="-Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m"
+```
 
 ### Customize Logging configuration
 	* Logging configuration can be customized by modifying <felix home>/etc/services/org.ops4j.pax.logging.properties.
