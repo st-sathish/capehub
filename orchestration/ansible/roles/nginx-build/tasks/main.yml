@@ -1,0 +1,68 @@
+---
+
+- name: Install Git
+  apt: pkg=git update_cache=yes state=present
+  sudo: yes
+
+- name: Install PCRE library
+  apt: pkg=libpcre3-dev state=present
+  sudo: yes
+
+- name: Install OpenSSL development headers
+  apt: pkg=libssl-dev state=present
+  sudo: yes
+
+- name: Install build tools
+  apt: pkg=build-essential state=present
+  sudo: yes
+
+- name: Create CH parent dir
+  file: path={{ch_parent_dir}}/ owner="{{capehub_user}}" group="{{capehub_group}}" state=directory recurse=true
+  sudo: true
+
+- name: Checking if nginx binary exists
+  stat: path={{ch_tools_dir}}/nginx/sbin/nginx
+  register: nginxpresent
+
+- include: ../../nginx-stop/tasks/main.yml
+
+- include: ../../common/tasks/create_tools_bin.yml
+
+- name: Create CH shared dir
+  file: path={{ch_work_dir}} owner="{{capehub_user}}" group="{{capehub_group}}" state=directory
+
+- name: Downloading nginx
+  get_url: url=http://nginx.org/download/nginx-{{nginx_version}}.tar.gz
+           dest={{ch_tool_archive_dir}}/nginx-{{nginx_version}}.tar.gz
+           force=no
+
+- name: Decompressing nginx
+  unarchive: src={{ch_tool_archive_dir}}/nginx-{{nginx_version}}.tar.gz dest={{ch_tools_dir}} copy=no
+            creates={{nginx_home}}
+
+- name: Preparing to build nginx
+  shell: ./configure --prefix={{ch_tools_dir}}/nginx --pid-path=/var/run/nginx.pid
+         chdir={{ch_tools_dir}}/nginx-1.2.4
+  when: inventory_hostname not in groups['streamer']
+
+- name: Building nginx
+  shell: make
+         chdir={{ch_tools_dir}}/nginx-1.2.4
+
+- name: Installing nginx
+  shell: make install
+         chdir={{ch_tools_dir}}/nginx-1.2.4
+
+- name: Configuring nginx for http
+  template: src=nginx-http.conf dest={{mc_tools_dir}}/nginx/conf/nginx.conf
+  when: inventory_hostname not in groups['streamer'] and build_nginx
+
+- name: Configuring nginx init script
+  template: src=nginx dest=/etc/init.d/nginx mode=0755
+  when: build_nginx
+  sudo: yes
+
+- name: Setting nginx to start on boot
+  service: name=nginx state=stopped enabled=yes
+  when: build_nginx
+  sudo: yes

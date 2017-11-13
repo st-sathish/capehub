@@ -1,0 +1,34 @@
+---
+
+  # This playbook deploys a full Matterhorn cluster
+
+- hosts: mysql
+  user: "{{capehub_user}}"
+  
+  roles:
+  
+  vars_files:
+  
+  
+- hosts: admin
+  user: "{{capehub_user}}"
+  
+  roles:
+  
+  vars_files:
+  
+- hosts: user
+  user: "{{capehub_user}}"
+  
+  roles:
+  
+  vars_files:
+  
+  
+- hosts: nginx
+  user: "{{capehub_user}}"
+  
+  roles:
+  
+  vars_files:
+  

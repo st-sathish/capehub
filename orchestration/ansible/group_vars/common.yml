@@ -1,0 +1,93 @@
+---
+
+#The location of the Git repo you want to fetch
+#Note: If this is a protected repository you will need to make it ssh accessible, and populate the ssh directory in group_vars with an appropriate deployment key and known hosts file
+git_repo_location: https://github.com/st-sathish/capehub.git
+
+#The user to run the Capehub service(s) as.  This includes nginx instances.
+capehub_user: capehub
+#The group to run the Capehub service(s) as.  This includes nginx instances.
+capehub_group: capehub
+
+#Set this to true to enable the JVM debugging interface.  Do not do this for production systems.
+ch_debug: false
+
+#Capehub's admin username
+ch_admin_username: admin
+#Capehub's admin password
+ch_admin_password: admin
+#Capehub's digest username
+#Your Client will need this
+ch_digest_username: capehub_system_account
+#Capehub's digest password
+#Your Client will need this
+ch_digest_password: CHANGE_ME
+
+#These two must match
+#The git branch/tag to check out.
+ch_version: 2.0.0
+#The pom version within that branch/tag
+ch_pom_version: 2.0.0
+
+#The parent directory for all Capehub related services
+ch_parent_dir: /opt/capehub
+#Where to store Capehub itself
+ch_base_dir: "{{ch_parent_dir}}/capehub"
+#Where to store Capehub's configuration data.
+ch_config_dir: "/etc/capehub"
+#Where to store Capehub's logs.
+ch_log_dir: "/var/log/capehub"
+
+#The admin URL.  This is the URL you use to access the admin UI
+admin_url: "http://{{groups['admin'][0]}}"
+#The user URL.  This is the URL you use to access the user UI
+user_url: "http://{{groups['user'][0]}}"
+
+#The database schema's name
+db_schema: capehub
+#The database server
+db_host: "{{groups['mysql'][0]}}"
+#True to generate the DB tables on startup, false use the schema below
+db_ddl: false
+#The database schema location
+db_schema_location: "{{ch_base_dir}}/docs/scripts/ddl/mysql5.sql"
+#The full URL of the database server
+db_url: "jdbc:mysql://{{db_host}}/{{db_schema}}"
+#The database user
+db_user: capehub
+#The database password
+db_pass: capehub 
+
+#Where to store the auxilliary application
+ch_tools_dir: "{{ch_parent_dir}}/tools"
+#This directory is added to the path, symlinks are encouraged
+ch_tools_bin: "{{ch_tools_dir}}/bin"
+#Where to store downloaded tool archives
+ch_tool_archive_dir: "{{ch_tools_dir}}/downloads"
+
+#The nginx version to use
+nginx_version: 1.2.4
+#Where to store nginx
+nginx_home: "{{ch_tools_dir}}/nginx-{{nginx_version}}"
+
+#The maven version.  Many distros do not have 3.1.0 as part of their packages yet
+mvn_version: 3.1.0
+#Where to download Maven from
+mvn_url: "http://archive.apache.org/dist/maven/maven-3/{{mvn_version}}/binaries/apache-maven-{{mvn_version}}-bin.tar.gz"
+#Where to store Maven
+mvn_home: "{{ch_tools_dir}}/apache-maven-{{mvn_version}}"
+#Where to store the M2 backup directory in the case of a wipe.
+m2_backup_dir: "/opt/m2_backup"
+#Where to store the Maven repository
+m2_repo: "{{ch_work_dir}}/.m2/repository"
+#The default Maven options.
+maven_opts: "-Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m -Dmaven.repo.local={{m2_repo}}"
+
+#Set to true to skip checkstyles during build
+checkstyle_skip: false
+#Set to tru to skip tests during build
+skip_tests: false
+#Set to false to skip building entirely (just reset the configuration files)
+do_build: true
+#Set to false to skip building nginx
+build_nginx: true

@@ -232,7 +232,6 @@ public class UserAndRoleDirectoryServiceImpl implements UserDirectoryService, Us
           authorities.add(new SimpleGrantedAuthority(role.getName()));
       }
 
-      //authorities.add(new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
       // need a non null password to instantiate org.springframework.security.core.userdetails.User
       // but CAS authenticated users have no password
       String password = user.getPassword() == null ? DEFAULT_PASSWORD : user.getPassword();
